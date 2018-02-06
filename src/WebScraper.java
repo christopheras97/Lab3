@@ -32,9 +32,25 @@ public class WebScraper {
         return count;
     }
 
-
+    public static int specificWordCount(String word) {
+        String file = urlToString("http://erdani.com/tdpl/hamlet.txt");
+        String[] wordArray = file.split("[\t\n!@#$%^&*()\\-_+\\[{\\]};:' `~=?.,<>/|]+");
+        int count = 0;
+        for (int j = 0; j < wordArray.length; j++) {
+            wordArray[j] = wordArray[j].toLowerCase();
+            if (wordArray[j] == word) {
+                count += 1;
+            }
+        }
+        return count;
+    }
     public static void main(String[] unused) {
         String fileToAccess = urlToString("http://erdani.com/tdpl/hamlet.txt");
         System.out.println(wordCount(fileToAccess));
+        String theWord = "";
+        Scanner input = new Scanner(System.in);
+        System.out.println("Word to look for?" + theWord);
+        theWord = input.nextLine();
+        System.out.println(specificWordCount(theWord));
     }
 }
